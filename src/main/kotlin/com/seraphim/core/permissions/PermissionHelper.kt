@@ -52,6 +52,33 @@ object PermissionHelper {
         return arrayOf(Manifest.permission.CAMERA)
     }
 
+    fun getLocationPermissions(): Array<String> {
+        return when {
+            Build.VERSION.SDK_INT >= 31 -> arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+
+            Build.VERSION.SDK_INT >= 29 -> arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+//                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+
+            else -> arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    fun getBackLocationPermissions(): Array<String> {
+        
+        return when {
+            Build.VERSION.SDK_INT >= 29 -> arrayOf(
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+
+            else -> emptyArray()
+        }
+    }
+
     fun getStoragePermissions(): Array<String> {
         return when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
