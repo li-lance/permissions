@@ -1,7 +1,6 @@
 package com.seraphim.core.permissions
 
 import android.content.pm.PackageManager
-import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -52,5 +51,6 @@ abstract class PermissionsActivity(@LayoutRes layoutId: Int) : AppCompatActivity
     }
 
     abstract fun onPermissionsGranted()
+
     abstract fun onPermissionsDenied()
 }

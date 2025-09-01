@@ -20,4 +20,14 @@ object SeraphimPermissionsUtils {
         }
         activity.startActivity(intent)
     }
+
+    /**
+     * 业务方可在 Activity/Fragment 中调用：
+     * val launcher = SeraphimPermissionsUtils.registerForPermissionResult(this) { granted -> ... }
+     * launcher.launch(SeraphimPermissionRequestContract.Input(...))
+     */
+    fun registerForPermissionResult(
+        activity: androidx.activity.ComponentActivity,
+        callback: (Boolean) -> Unit
+    ) = activity.registerForActivityResult(SeraphimPermissionRequestContract(), callback)
 }
