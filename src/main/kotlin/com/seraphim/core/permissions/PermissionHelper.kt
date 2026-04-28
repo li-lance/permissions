@@ -115,4 +115,29 @@ object PermissionHelper {
             else -> true
         }
     }
+
+    // ── NFC 相关权限 ───────────────────────────────
+
+    /**
+     * NFC 功能本身不需要运行时权限，但 Nearby 交互（如 Android Beam / 设备配对）
+     * 在 Android 12+ 需要 BLUETOOTH_CONNECT / BLUETOOTH_SCAN。
+     * 本模块仅返回空数组，由调用方按需补充。
+     */
+    fun getNfcPermissions(): Array<String> = emptyArray()
+
+    /**
+     * 检查设备是否具备 NFC 硬件
+     */
+    fun isNfcHardwareAvailable(context: android.content.Context): Boolean {
+        val nfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(context)
+        return nfcAdapter != null
+    }
+
+    /**
+     * 检查 NFC 是否已开启
+     */
+    fun isNfcEnabled(context: android.content.Context): Boolean {
+        val nfcAdapter = android.nfc.NfcAdapter.getDefaultAdapter(context)
+        return nfcAdapter?.isEnabled == true
+    }
 }
